@@ -88,7 +88,7 @@ public class EmployeeService {
     public void postNewTask(Integer employeeId, TaskDTO newTask) {
         Optional<Employee> employee = employeeRepository.findById(employeeId);
         if (employee.isEmpty()) {
-            throw new EntityNotFoundException("Сотрудник " + employeeId + " не найден");
+            throw new EntityNotFoundException("Employee " + employeeId + " not found");
         }
 
         Task task = new Task();

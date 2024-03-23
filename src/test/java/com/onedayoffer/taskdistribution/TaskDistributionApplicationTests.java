@@ -144,6 +144,7 @@ class TaskDistributionApplicationTests {
 						.contentType(MediaType.APPLICATION_JSON)
 						.content(request))
 				.andDo(print())
-				.andExpect(status().isBadRequest());
+				.andExpect(status().isBadRequest())
+				.andExpect(content().string(org.hamcrest.Matchers.containsString("Employee 100 not found")));
 	}
 }
