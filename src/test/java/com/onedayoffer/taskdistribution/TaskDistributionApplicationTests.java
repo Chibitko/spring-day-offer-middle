@@ -126,4 +126,24 @@ class TaskDistributionApplicationTests {
 				.andExpect(jsonPath("$.*", isA(ArrayList.class)))
 				.andExpect(jsonPath("$.*", hasSize(4)));
 	}
+
+	@Test
+	void shouldReceiveBadRequestEmployeeNotFound() throws Exception {
+		String request = "{ \"name\": " +
+				"\"new-task-123\", " +
+				"\"taskType\": " +
+				"\"INVENTORY\", " +
+				"\"status\": " +
+				"\"APPOINTED\", " +
+				"\"priority\": " +
+				"2, " +
+				"\"leadTime\": " +
+				"8 }";
+
+		this.mockMvc.perform(post("/employees/100/tasks")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(request))
+				.andDo(print())
+				.andExpect(status().isBadRequest());
+	}
 }
